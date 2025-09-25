@@ -14,13 +14,19 @@ async function checkAuthentication(req, res, next) {
       const verifiedUser = jwt.verify(token, process.env.JWT_SECRET_KEY);
       //   attach the verifiedUserId user's details into the req.body
       req.body = await User.findById(verifiedUser.id).select(["-password"]);
-      console.log(req.body);
+
+      return next();
     } catch (error) {
       console.error(error);
-      res.status(401).json({ message: "Not authorized, token failed" });
+      return res.status(401).json({ message: "Not authorized, token failed" });
     }
   }
-  next();
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Not authorized, no token",
+    });
+  }
 }
 
 module.exports = { checkAuthentication };
