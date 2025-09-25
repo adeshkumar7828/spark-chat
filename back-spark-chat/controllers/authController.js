@@ -1,19 +1,27 @@
 const User = require("../models/userSchema");
+const { generateToken } = require("../utils/generateToken.js");
 
 async function handleUserLogin(req, res) {
   const { email, password } = req.body;
 
   const userExists = await User.findOne({ email });
 
-  if (!userExists)
+  if (!userExists) {
     return res.status(401).json({ message: "User does not exists!!" });
+  }
 
   const isCorrectPassword = await userExists.comparePassword(password);
 
   if (userExists && isCorrectPassword) {
-    res
-      .status(200)
-      .json({ msg: "login successful write logic for login later" });
+    const { _id, userName, email } = userExists;
+    const token = generateToken(_id);
+
+    res.status(200).json({
+      _id,
+      userName,
+      email,
+      token,
+    });
   } else {
     res.status(401).json({ message: "Invalid email or password" });
   }

@@ -1,13 +1,16 @@
 const User = require("../models/userSchema");
 
-async function handleGetUser(req, res) {
+async function handleLoggedInUser(req, res) {
   try {
-    res.send("Hello from handleGetUser");
+    const { userName, email, profilePicture } = req.body;
+    res.status(200).json({
+      userName,
+      email,
+      profilePicture,
+    });
   } catch (error) {
     res.status(400).json(error);
   }
-
-  res.send("Hello from the getUser");
 }
 
 async function handleCreateUser(req, res) {
@@ -28,6 +31,6 @@ async function handleCreateUser(req, res) {
 }
 
 module.exports = {
-  handleGetUser,
+  handleLoggedInUser,
   handleCreateUser,
 };
