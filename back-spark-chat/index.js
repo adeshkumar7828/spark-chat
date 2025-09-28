@@ -6,6 +6,7 @@ const connectionToDB = require("./config/db.js");
 // import router
 const userRouter = require("./routes/userRoutes.js");
 const authRouter = require("./routes/authRoutes.js");
+const conversationRouter = require("./routes/conversationRoutes.js");
 
 // Load variables from .env file
 dotenv.config();
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 // ROUTES
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/conversations", conversationRouter);
 
 app.listen(PORT, () => {
   console.log(`Server started at PORT: ${PORT}`);

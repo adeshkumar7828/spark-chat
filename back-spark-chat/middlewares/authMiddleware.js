@@ -13,7 +13,7 @@ async function checkAuthentication(req, res, next) {
       // verify the token
       const verifiedUser = jwt.verify(token, process.env.JWT_SECRET_KEY);
       //   attach the verifiedUserId user's details into the req.body
-      req.body = await User.findById(verifiedUser.id).select(["-password"]);
+      req.user = await User.findById(verifiedUser.id).select(["-password"]);
 
       return next();
     } catch (error) {
