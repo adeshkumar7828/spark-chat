@@ -16,7 +16,7 @@ async function handleCreateConverstation(req, res) {
       participants,
     });
 
-    res.send({
+    res.json({
       msg: "Conversation Created",
       newConversation,
     });
@@ -35,13 +35,33 @@ async function handleGetAllConversation(req, res) {
       participants: loggedinUserId,
     });
 
-    res.send({ msg: "Hello from handleGetAllConversation", conversations });
+    res.json({ msg: "Hello from handleGetAllConversation", conversations });
   } catch (error) {
-    res.send({
+    res.json({
       msg: "Unable to fetch conversation",
       error,
     });
   }
 }
 
-module.exports = { handleCreateConverstation, handleGetAllConversation };
+async function handleGetConversationByID(req, res) {
+  try {
+    const { _id } = req.params;
+
+    const requestedConversation = await Conversation.find({
+      participants: { $all: [req.user._id, _id] },
+    });
+    res.json({
+      msg: "Hello from hadnleGetCOnversation by id",
+      requestedConversation,
+    });
+  } catch (error) {
+    res.json({ msg: "Unable to fetch the conversation", error });
+  }
+}
+
+module.exports = {
+  handleCreateConverstation,
+  handleGetAllConversation,
+  handleGetConversationByID,
+};
