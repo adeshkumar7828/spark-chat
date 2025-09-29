@@ -1,3 +1,5 @@
+import { NavLink } from "react-router";
+
 function LoginPage() {
   return (
     <div className="h-screen flex items-center justify-center bg-base-200">
@@ -18,9 +20,9 @@ function LoginPage() {
         </form>
         <p className="text-center text-sm mt-4">
           Don't have an account?{" "}
-          <a href="#" className="link link-primary">
+          <NavLink to="/register" className="link link-primary">
             Sign up
-          </a>
+          </NavLink>
         </p>
       </div>
     </div>

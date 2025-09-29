@@ -6,6 +6,7 @@ import Composer from "./Composer";
 import NewChatModal from "./NewChatModal";
 import MoreOptionsMenu from "./MoreOptionsMenu";
 import MainHeader from "./MainHeader";
+import ProtectedRoute from "./ProtectedRoute";
 
 export {
   Sidebar,
@@ -16,4 +17,5 @@ export {
   NewChatModal,
   MoreOptionsMenu,
   MainHeader,
+  ProtectedRoute,
 };

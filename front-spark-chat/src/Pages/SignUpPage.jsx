@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function SignUpPage() {
   return (
     <div className="h-screen flex items-center justify-center bg-base-200">
@@ -28,9 +30,9 @@ function SignUpPage() {
         </form>
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
-          <a href="#" className="link link-primary">
+          <Link to="/login" className="link link-primary">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
