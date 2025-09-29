@@ -5,9 +5,7 @@ import MessageList from "./MessageList";
 import Composer from "./Composer";
 import NewChatModal from "./NewChatModal";
 import MoreOptionsMenu from "./MoreOptionsMenu";
-import LoginPage from "./LoginPage";
-import LogoutPage from "./LogoutPage";
-import SignUpPage from "./SignUpPage";
+import MainHeader from "./MainHeader";
 
 export {
   Sidebar,
@@ -17,7 +15,5 @@ export {
   Composer,
   NewChatModal,
   MoreOptionsMenu,
-  LoginPage,
-  LogoutPage,
-  SignUpPage,
+  MainHeader,
 };
