@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { usePostUserDataForRegistrationMutation } from "../services/api/api";
+import { usePostUserDataForRegistrationMutation } from "../services/injected/authApi.js";
 
 function SignUpPage() {
   const [registration, { isLoading, isError, isSuccess }] =
