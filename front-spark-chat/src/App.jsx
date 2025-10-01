@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import { LoginPage, LogoutPage, MainHomepage, SignUpPage } from "./Pages";
-import { MainHeader, ProtectedRoute } from "./components";
+import { ProtectedRoute } from "./components";
 import { AuthLayout, MainLayout } from "./layouts/index.js";
 
 function App() {

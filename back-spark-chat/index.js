@@ -3,6 +3,15 @@ const dotenv = require("dotenv");
 const app = express();
 const connectionToDB = require("./config/db.js");
 
+// CORS Setup
+const cors = require("cors");
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
+
 // import router
 const userRouter = require("./routes/userRoutes.js");
 const authRouter = require("./routes/authRoutes.js");

@@ -8,6 +8,8 @@ const { checkAuthentication } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
+// ROUTE NAME: "/api/conversations"
+
 router.post("/", checkAuthentication, handleCreateConverstation);
 router.get("/", checkAuthentication, handleGetAllConversation);
 router.get("/:_id", checkAuthentication, handleGetConversationByID);

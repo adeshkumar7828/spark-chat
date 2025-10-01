@@ -6,6 +6,8 @@ const {
 
 const router = express.Router();
 
+// ROUTE NAME: "/api/auth"
+
 // Authenticates an existing user and returns an access token.
 router.post("/login", handleUserLogin);
 
