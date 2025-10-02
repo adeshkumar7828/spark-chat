@@ -1,18 +1,29 @@
+import { useState } from "react";
 import { ContactItem } from "./ContactItem";
+import SidebarSearchResults from "./SidebarSearchResults";
+import useDebounce from "../customHooks/useDebounce.js";
 
 function Sidebar() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
   return (
     <aside className="col-span-3 md:col-span-3 bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3 shadow-lg flex flex-col">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Chats</h2>
+        <h2 className="text-xl font-semibold">Chats </h2>
         <button className="btn btn-ghost btn-sm">New</button>
       </div>
 
-      <div className="search mb-3">
+      <div className="search mb-3 relative">
         <input
           className="input input-sm w-full rounded-full"
           placeholder="Search contacts"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
+        {debouncedSearchTerm && (
+          <SidebarSearchResults debouncedSearchTerm={debouncedSearchTerm} />
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto space-y-2 pr-1">

@@ -5,7 +5,7 @@ function AuthLayout() {
   return (
     <>
       <LogoHeader />
-      <Outlet />;
+      <Outlet />
     </>
   );
 }
