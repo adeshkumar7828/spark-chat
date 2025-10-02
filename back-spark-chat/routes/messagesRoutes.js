@@ -3,15 +3,17 @@ const {
   handleCreateMessage,
   handleGetMessagesOfConversation,
 } = require("../controllers/messagesController.js");
-const { checkAuthentication } = require("../middlewares/authMiddleware.js");
+const {
+  checkAuthenticationfromBearer,
+} = require("../middlewares/authMiddlewareBearer.js");
 
 const router = express.Router();
 
 // ROUTE NAME: "/api/messages"
-router.post("/", checkAuthentication, handleCreateMessage);
+router.post("/", checkAuthenticationfromBearer, handleCreateMessage);
 router.get(
   "/:conversation_id",
-  checkAuthentication,
+  checkAuthenticationfromBearer,
   handleGetMessagesOfConversation
 );
 

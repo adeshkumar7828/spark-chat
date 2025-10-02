@@ -2,7 +2,7 @@ import { Sidebar, MessageList, Composer, ChatHeader } from "../components";
 
 function MainHomepage() {
   return (
-    <div className="h-screen bg-base-200">
+    <div className="h-[90vh] bg-base-200">
       <div className="max-w-[1200px] mx-auto h-full grid grid-cols-12 gap-4 p-4">
         <Sidebar />
         <main className="col-span-9 md:col-span-9 flex flex-col bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-lg overflow-hidden">

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/userSchema");
+const User = require("../models/userSchema.js");
 
-async function checkAuthentication(req, res, next) {
+async function checkAuthenticationfromBearer(req, res, next) {
   let token;
   if (
     req.headers.authorization &&
@@ -29,4 +29,4 @@ async function checkAuthentication(req, res, next) {
   }
 }
 
-module.exports = { checkAuthentication };
+module.exports = { checkAuthenticationfromBearer };

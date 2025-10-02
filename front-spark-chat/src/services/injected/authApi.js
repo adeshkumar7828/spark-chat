@@ -29,10 +29,18 @@ export const authApi = api.injectEndpoints({
         }
       },
     }),
+
+    getUserDataFromCookies: builder.query({
+      query: () => ({
+        url: "/api/users/me",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 export const {
   usePostUserDataForRegistrationMutation,
   usePostUserDataForLoginMutation,
+  useGetUserDataFromCookiesQuery,
 } = authApi;

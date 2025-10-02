@@ -16,11 +16,17 @@ async function handleUserLogin(req, res) {
     const { _id, userName, email } = userExists;
     const token = generateToken(_id);
 
+    res.cookie("token", token, {
+      httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
+      secure: process.env.NODE_ENV === "production", // Use 'secure: true' in production
+      sameSite: "strict", // Provides CSRF protection
+      maxAge: 3600000, // 1 hour (in milliseconds)
+    });
+
     res.status(200).json({
       _id,
       userName,
       email,
-      token,
     });
   } else {
     res.status(401).json({ message: "Invalid email or password" });

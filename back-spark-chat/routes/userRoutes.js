@@ -3,14 +3,15 @@ const {
   handleLoggedInUser,
   handleCreateUser,
 } = require("../controllers/userController");
-const { checkAuthentication } = require("../middlewares/authMiddleware.js");
+
+const checkAuthByCookie = require("../middlewares/authMiddlewareCookie.js");
 
 const router = express.Router();
 
 // ROUTE NAME: "/api/users"
 
 // Retrieves the currently authenticated user's details
-router.get("/me", checkAuthentication, handleLoggedInUser);
+router.get("/me", checkAuthByCookie, handleLoggedInUser);
 
 router.post("/register", handleCreateUser);
 

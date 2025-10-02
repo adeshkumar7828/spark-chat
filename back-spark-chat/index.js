@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const cookieParser = require("cookie-parser");
 const connectionToDB = require("./config/db.js");
 
 // import router
@@ -19,6 +19,9 @@ app.use(
     credentials: true,
   })
 );
+
+// cookier-parser
+app.use(cookieParser());
 
 // Load variables from .env file
 dotenv.config();
