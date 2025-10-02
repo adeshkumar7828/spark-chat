@@ -1,7 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const app = express();
+
 const connectionToDB = require("./config/db.js");
+
+// import router
+const userRouter = require("./routes/userRoutes.js");
+const authRouter = require("./routes/authRoutes.js");
+const conversationRouter = require("./routes/conversationRoutes.js");
+const messagesRouter = require("./routes/messagesRoutes.js");
+
+const app = express();
 
 // CORS Setup
 const cors = require("cors");
@@ -11,12 +19,6 @@ app.use(
     credentials: true,
   })
 );
-
-// import router
-const userRouter = require("./routes/userRoutes.js");
-const authRouter = require("./routes/authRoutes.js");
-const conversationRouter = require("./routes/conversationRoutes.js");
-const messagesRouter = require("./routes/messagesRoutes.js");
 
 // Load variables from .env file
 dotenv.config();

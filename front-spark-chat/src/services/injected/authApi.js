@@ -1,4 +1,4 @@
-import { setCredentails } from "../../features/auth/authSlice.js";
+import { setCredentials } from "../../features/auth/authSlice.js";
 import { api } from "../api/api.js";
 
 //  baseUrl: "http://localhost:3000"
@@ -23,7 +23,7 @@ export const authApi = api.injectEndpoints({
       onQueryStarted: async (credentials, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-          dispatch(setCredentails(data));
+          dispatch(setCredentials(data));
         } catch (err) {
           console.error(err);
         }
