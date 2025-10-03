@@ -5,7 +5,7 @@ import useDebounce from "../customHooks/useDebounce.js";
 
 function Sidebar() {
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   return (
     <aside className="col-span-3 md:col-span-3 bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3 shadow-lg flex flex-col">
@@ -34,13 +34,6 @@ function Sidebar() {
           online
           initial="R"
           active
-        />
-        <ContactItem
-          name="Neha"
-          last="Sent a file"
-          time="8:40"
-          online={false}
-          initial="N"
         />
       </div>
 

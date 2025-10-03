@@ -25,7 +25,9 @@ function SidebarSearchResults({ debouncedSearchTerm }) {
                     R
                   </div>
                 </div>
-                <span className="flex-1">{el.userName}</span>
+                <span className="flex-1">
+                  <button>{el.userName}</button>
+                </span>
               </a>
             </li>
           ))
