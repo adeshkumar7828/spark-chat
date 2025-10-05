@@ -4,8 +4,12 @@ import SidebarSearchResults from "./SidebarSearchResults";
 import useDebounce from "../customHooks/useDebounce.js";
 import { useGetAllConversationsQuery } from "../services/injected/conversationApi.js";
 import { useGetUserDataFromCookiesQuery } from "../services/injected/authApi.js";
+import { useSelector } from "react-redux";
 
 function Sidebar() {
+  const na = useSelector((state) => state.auth);
+  console.log(na);
+
   const { data: currentUser, isLoading } = useGetUserDataFromCookiesQuery();
   const userName = !isLoading && currentUser.userName;
 

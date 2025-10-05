@@ -5,7 +5,7 @@ import { useGetUserDataFromCookiesQuery } from "../services/injected/authApi";
 function ProtectedRoute() {
   const { user } = useSelector((state) => state.auth);
   const { data, isLoading, isError, isSuccess } =
-    useGetUserDataFromCookiesQuery(undefined, { skip: user });
+    useGetUserDataFromCookiesQuery(undefined, { skip: !!user });
 
   // If user data exists in Redux, render protected content immediately
   if (user) {

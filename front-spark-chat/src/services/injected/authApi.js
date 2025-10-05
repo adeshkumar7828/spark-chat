@@ -38,8 +38,15 @@ export const authApi = api.injectEndpoints({
         url: "/api/users/me",
         method: "GET",
       }),
-
       providesTags: ["User"],
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setCredentials(data));
+        } catch (err) {
+          console.error(err);
+        }
+      },
     }),
 
     getAllUsers: builder.query({

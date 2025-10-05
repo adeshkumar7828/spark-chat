@@ -2,11 +2,12 @@ const User = require("../models/userSchema");
 
 async function handleLoggedInUser(req, res) {
   try {
-    const { userName, email, profilePicture } = req.user;
+    const { _id, userName, email, profilePicture } = req.user;
     res.status(200).json({
       userName,
       email,
       profilePicture,
+      _id,
     });
   } catch (error) {
     res.status(400).json(error);
