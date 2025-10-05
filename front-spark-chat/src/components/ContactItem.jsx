@@ -1,5 +1,6 @@
-import { useGetUserDataFromCookiesQuery } from "../services/injected/authApi";
+import { useDispatch } from "react-redux";
 import { useGetConversationByIdQuery } from "../services/injected/conversationApi";
+import { addConversationName } from "../features/conversation/conversationSlice";
 
 function ContactItem({
   _id,
@@ -11,19 +12,24 @@ function ContactItem({
   active,
 }) {
   const { data: conversation, isLoading } = useGetConversationByIdQuery(_id);
-  console.log(conversation);
-  console.log(loggedInUser);
+
   const singleConv = !isLoading && conversation[0]; //getting error before data arrived
 
   const nameOfConversation =
     !isLoading &&
     singleConv.participantsName.filter((el) => el !== loggedInUser);
 
+  const dispatch = useDispatch();
+
+  function handleSendConversationName(name) {
+    dispatch(addConversationName(name));
+  }
   return (
     <button
       className={`group w-full text-left flex items-center gap-3 p-2 rounded-xl hover:bg-primary/10 transition ${
         active ? "bg-primary/10" : ""
       } cursor-default hover:cursor-pointer`}
+      onClick={() => handleSendConversationName(nameOfConversation[0])}
     >
       <div className="avatar">
         <div className="w-12 h-12 rounded-full bg-neutral text-neutral-content flex items-center justify-center">

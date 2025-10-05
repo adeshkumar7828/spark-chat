@@ -9,7 +9,7 @@ function Composer() {
           placeholder="Type a message"
           className="input input-bordered flex-1 rounded-full h-12"
         />
-        <button type="submit" className="btn btn-primary rounded-full">
+        <button disabled className="btn btn-primary rounded-full">
           Send
         </button>
       </div>
