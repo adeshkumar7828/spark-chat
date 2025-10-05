@@ -9,11 +9,9 @@ function ContactItem({
   initial,
   active,
 }) {
-  const {
-    data: [conversation],
-    isLoading,
-  } = useGetConversationByIdQuery(_id);
-  console.log(conversation);
+  const { data: conversation, isLoading } = useGetConversationByIdQuery(_id);
+
+  const singleConv = !isLoading && conversation[0]; //getting error before data arrived
 
   if (isLoading) {
     return <div>Loading contact...</div>; // You can use a skeleton loader here
@@ -32,7 +30,7 @@ function ContactItem({
       </div>
       <div className="flex-1">
         <div className="flex items-center justify-between">
-          <div className="font-medium">{conversation.createdWith}</div>
+          <div className="font-medium">{singleConv.createdWith}</div>
           <div className="text-xs text-muted">{time}</div>
         </div>
         <div className="text-sm text-muted line-clamp-1">{last}</div>

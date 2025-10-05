@@ -36,7 +36,7 @@ async function handleGetAllConversation(req, res) {
   const loggedinUserId = req.user._id;
   try {
     const conversations = await Conversation.find({
-      participants: loggedinUserId,
+      participants: { $in: [loggedinUserId] },
     });
 
     res.json(conversations);

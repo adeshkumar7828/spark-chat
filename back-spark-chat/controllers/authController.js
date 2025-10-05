@@ -34,7 +34,8 @@ async function handleUserLogin(req, res) {
 }
 
 function handleUserLogout(req, res) {
-  res.send("hello from handleUserLogout");
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logout successful" });
 }
 
 module.exports = {
