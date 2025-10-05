@@ -13,9 +13,11 @@ const conversationSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    createdWith: {
-      type: String,
-    },
+    participantsName: [
+      {
+        type: String,
+      },
+    ],
     isGroup: {
       type: Boolean,
       default: false,

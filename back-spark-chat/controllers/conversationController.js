@@ -10,14 +10,14 @@ async function handleCreateConverstation(req, res) {
       req.user.userName,
       req.body.userName
     );
-    const createdWith = req.body.userName;
+    const participantsName = [req.user.userName, req.body.userName];
 
     const participants = [req.user._id, req.body._id];
 
     const newConversation = await Conversation.create({
       conversationName,
       participants,
-      createdWith,
+      participantsName,
     });
 
     res.json({
