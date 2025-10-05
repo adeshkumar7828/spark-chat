@@ -10,7 +10,7 @@ function Sidebar() {
 
   const { data } = useGetAllConversationsQuery();
   // const [conversationData, setConversationData] = useState([]);
-  console.log(data);
+  // console.log(data);
   return (
     <aside className="col-span-3 md:col-span-3 bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3 shadow-lg flex flex-col">
       <div className="flex items-center justify-between mb-4">
@@ -37,7 +37,7 @@ function Sidebar() {
         {data?.map((conv) => (
           <ContactItem
             key={conv._id}
-            name={conv.createdWith}
+            _id={conv._id}
             last="Hey, how are you?"
             time="9:23"
             online

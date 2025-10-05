@@ -11,6 +11,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: { ...userData },
       }),
+      invalidatesTags: ["User"],
     }),
 
     postUserDataForLogin: builder.mutation({
@@ -19,6 +20,8 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: { ...credentials },
       }),
+
+      invalidatesTags: ["User"],
 
       onQueryStarted: async (credentials, { dispatch, queryFulfilled }) => {
         try {
@@ -35,6 +38,8 @@ export const authApi = api.injectEndpoints({
         url: "/api/users/me",
         method: "GET",
       }),
+
+      providesTags: ["User"],
     }),
 
     getAllUsers: builder.query({
@@ -42,6 +47,8 @@ export const authApi = api.injectEndpoints({
         url: `/api/users/${query}`,
         method: "GET",
       }),
+
+      providesTags: ["User"],
     }),
   }),
 });

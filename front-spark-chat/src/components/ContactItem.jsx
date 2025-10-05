@@ -1,4 +1,24 @@
-function ContactItem({ name, last, time, online = true, initial, active }) {
+import { useGetConversationByIdQuery } from "../services/injected/conversationApi";
+
+function ContactItem({
+  _id,
+  name,
+  last,
+  time,
+  online = true,
+  initial,
+  active,
+}) {
+  const {
+    data: [conversation],
+    isLoading,
+  } = useGetConversationByIdQuery(_id);
+  console.log(conversation);
+
+  if (isLoading) {
+    return <div>Loading contact...</div>; // You can use a skeleton loader here
+  }
+
   return (
     <button
       className={`group w-full text-left flex items-center gap-3 p-2 rounded-xl hover:bg-primary/10 transition ${
@@ -12,7 +32,7 @@ function ContactItem({ name, last, time, online = true, initial, active }) {
       </div>
       <div className="flex-1">
         <div className="flex items-center justify-between">
-          <div className="font-medium">{name}</div>
+          <div className="font-medium">{conversation.createdWith}</div>
           <div className="text-xs text-muted">{time}</div>
         </div>
         <div className="text-sm text-muted line-clamp-1">{last}</div>

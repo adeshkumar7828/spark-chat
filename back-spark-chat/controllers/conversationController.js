@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Conversation = require("../models/conversation");
 const {
   generateConversationName,
@@ -51,13 +52,16 @@ async function handleGetConversationByID(req, res) {
   try {
     const { _id } = req.params;
 
+    // had to convert the string _id from request params into an ObjectId
+    // const params_id = mongoose.Types.ObjectId.createFromHexString(_id);
+    // const requestedConversation = await Conversation.find({
+    //   participants: { $all: [req.user._id, params_id] },
+    // });
+
     const requestedConversation = await Conversation.find({
-      participants: { $all: [req.user._id, _id] },
+      _id,
     });
-    res.json({
-      msg: "Hello from hadnleGetCOnversation by id",
-      requestedConversation,
-    });
+    res.json(requestedConversation);
   } catch (error) {
     res.json({ msg: "Unable to fetch the conversation", error });
   }

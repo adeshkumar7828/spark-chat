@@ -18,8 +18,19 @@ export const conversationApi = api.injectEndpoints({
       }),
       providesTags: ["Conversations"],
     }),
+
+    getConversationById: builder.query({
+      query: (_id) => ({
+        url: `/api/conversations/${_id}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, _id) => [{ type: "User", id: _id }],
+    }),
   }),
 });
 
-export const { usePostNewConversationMutation, useGetAllConversationsQuery } =
-  conversationApi;
+export const {
+  usePostNewConversationMutation,
+  useGetAllConversationsQuery,
+  useGetConversationByIdQuery,
+} = conversationApi;
