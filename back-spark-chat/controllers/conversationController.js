@@ -7,13 +7,16 @@ async function handleCreateConverstation(req, res) {
   try {
     const conversationName = generateConversationName(
       req.user.userName,
-      req.body.chatWith
+      req.body.userName
     );
-    const participants = [req.user._id, req.body.chatWith_id];
+    const createdWith = req.body.userName;
+
+    const participants = [req.user._id, req.body._id];
 
     const newConversation = await Conversation.create({
       conversationName,
       participants,
+      createdWith,
     });
 
     res.json({
@@ -35,7 +38,7 @@ async function handleGetAllConversation(req, res) {
       participants: loggedinUserId,
     });
 
-    res.json({ msg: "Hello from handleGetAllConversation", conversations });
+    res.json(conversations);
   } catch (error) {
     res.json({
       msg: "Unable to fetch conversation",

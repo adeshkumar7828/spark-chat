@@ -6,5 +6,6 @@ export const api = createApi({
     baseUrl: "http://localhost:3000",
     credentials: "include", // line for cookies to include
   }),
+  tagTypes: ["Conversations"],
   endpoints: () => ({}),
 });

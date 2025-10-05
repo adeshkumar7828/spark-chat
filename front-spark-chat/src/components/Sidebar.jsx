@@ -2,11 +2,15 @@ import { useState } from "react";
 import { ContactItem } from "./ContactItem";
 import SidebarSearchResults from "./SidebarSearchResults";
 import useDebounce from "../customHooks/useDebounce.js";
+import { useGetAllConversationsQuery } from "../services/injected/conversationApi.js";
 
 function Sidebar() {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
+  const { data } = useGetAllConversationsQuery();
+  // const [conversationData, setConversationData] = useState([]);
+  console.log(data);
   return (
     <aside className="col-span-3 md:col-span-3 bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3 shadow-lg flex flex-col">
       <div className="flex items-center justify-between mb-4">
@@ -22,19 +26,25 @@ function Sidebar() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         {debouncedSearchTerm && (
-          <SidebarSearchResults debouncedSearchTerm={debouncedSearchTerm} />
+          <SidebarSearchResults
+            debouncedSearchTerm={debouncedSearchTerm}
+            setSearchTerm={setSearchTerm}
+          />
         )}
       </div>
 
       <div className="flex-1 overflow-y-auto space-y-2 pr-1">
-        <ContactItem
-          name="Ravi"
-          last="Hey, how are you?"
-          time="9:23"
-          online
-          initial="R"
-          active
-        />
+        {data?.map((conv) => (
+          <ContactItem
+            key={conv._id}
+            name={conv.createdWith}
+            last="Hey, how are you?"
+            time="9:23"
+            online
+            initial="R"
+            active
+          />
+        ))}
       </div>
 
       <div className="mt-3 text-sm text-muted">

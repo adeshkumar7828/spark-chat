@@ -4,16 +4,15 @@ const {
   handleGetAllConversation,
   handleGetConversationByID,
 } = require("../controllers/conversationController");
-const {
-  checkAuthenticationfromBearer,
-} = require("../middlewares/authMiddlewareBearer.js");
+
+const checkAuthByCookie = require("../middlewares/authMiddlewareCookie.js");
 
 const router = express.Router();
 
 // ROUTE NAME: "/api/conversations"
 
-router.post("/", checkAuthenticationfromBearer, handleCreateConverstation);
-router.get("/", checkAuthenticationfromBearer, handleGetAllConversation);
-router.get("/:_id", checkAuthenticationfromBearer, handleGetConversationByID);
+router.post("/", checkAuthByCookie, handleCreateConverstation);
+router.get("/", checkAuthByCookie, handleGetAllConversation);
+router.get("/:_id", checkAuthByCookie, handleGetConversationByID);
 
 module.exports = router;
