@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import { useGetConversationByIdQuery } from "../services/injected/conversationApi";
-import { addConversationName } from "../features/conversation/conversationSlice";
+import {
+  addConversationName,
+  changeCurrentConvId,
+} from "../features/conversation/conversationSlice";
 
 function ContactItem({
   _id,
@@ -14,7 +17,6 @@ function ContactItem({
   const { data: conversation, isLoading } = useGetConversationByIdQuery(_id);
 
   const singleConv = !isLoading && conversation[0]; //getting error before data arrived
-
   const nameOfConversation =
     !isLoading &&
     singleConv.participantsName.filter((el) => el !== loggedInUser);
@@ -23,6 +25,7 @@ function ContactItem({
 
   function handleSendConversationName(name) {
     dispatch(addConversationName(name));
+    dispatch(changeCurrentConvId(singleConv._id));
   }
   return (
     <button
