@@ -9,6 +9,10 @@ const messagesApi = api.injectEndpoints({
         body: { ...msgObj },
       }),
       invalidatesTags: ["Messages"],
+
+      /*  keeping for later: invalidatesTags: (result, error, msgObj) => [
+     { type: "Messages", id: msgObj.conversationId },
+      ],*/
     }),
 
     getMessagesByConvId: builder.query({
@@ -17,6 +21,8 @@ const messagesApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Messages"],
+
+      /* keeping for later: providesTags: (result, error, _id) => [{ type: "Messages", id: _id }],*/
 
       onQueryStarted: async (_id, { dispatch, queryFulfilled }) => {
         try {

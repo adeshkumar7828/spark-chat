@@ -46,23 +46,27 @@ function MessageList() {
           </div>
         ) : (
           allMessagesOfConv.map((msgEl) => {
-            const value =
-              msgEl.createdBy === user._id
-                ? {
-                    side: "end",
-                    color: "primary",
-                    textColor: "primary-content",
-                  }
-                : { side: "start", color: "gray-100", textColor: "gray-900" };
-
             return (
-              <div className={`flex justify-${value.side}`} key={msgEl._id}>
+              <div
+                key={msgEl._id}
+                className={`flex ${
+                  msgEl.createdBy === user._id ? "justify-end" : "justify-start"
+                }`}
+              >
                 <div
-                  className={`bg-${value.color} text-${value.textColor} px-4 py-2 rounded-2xl max-w-[70%]`}
+                  className={`px-4 py-2 rounded-2xl max-w-[70%] ${
+                    msgEl.createdBy === user._id
+                      ? "bg-primary text-primary-content"
+                      : "bg-gray-100 text-gray-900"
+                  }`}
                 >
                   <div>{msgEl.content}</div>
                   <div
-                    className={`text-[10px] mt-1 text-${value.textColor} text-right`}
+                    className={`text-[10px] mt-1 text-right ${
+                      msgEl.createdBy === user._id
+                        ? "text-primary-content/80"
+                        : "text-gray-500"
+                    }`}
                   >
                     9:20
                   </div>
