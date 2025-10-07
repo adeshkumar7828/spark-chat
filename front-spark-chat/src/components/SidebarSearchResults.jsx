@@ -4,13 +4,20 @@ import { usePostNewConversationMutation } from "../services/injected/conversatio
 function SidebarSearchResults({ debouncedSearchTerm, setSearchTerm }) {
   const { data, isLoading } = useGetAllUsersQuery(debouncedSearchTerm, {
     skip: !debouncedSearchTerm,
+    refetchOnMountOrArgChange: true,
   });
 
-  const [createConversation] = usePostNewConversationMutation();
+  const [createConversation, { isLoading: isCreating }] =
+    usePostNewConversationMutation();
 
   async function handleSubmit(datas) {
-    const result = await createConversation(datas).unwrap();
-    setSearchTerm("");
+    if (isLoading || isCreating) return;
+    try {
+      const result = await createConversation(datas).unwrap();
+      setSearchTerm("");
+    } catch (err) {
+      console.error("Error creating conversation:", err);
+    }
   }
 
   return (
@@ -28,17 +35,16 @@ function SidebarSearchResults({ debouncedSearchTerm, setSearchTerm }) {
           data.map((el) => {
             return (
               <li key={el._id}>
-                <a className="flex items-center gap-3 p-3 w-full hover:bg-base-200 rounded-lg">
+                <a
+                  onClick={() => handleSubmit(el)}
+                  className="flex items-center gap-3 p-3 w-full hover:bg-base-200 rounded-lg"
+                >
                   <div className="avatar">
                     <div className="w-8 h-8 rounded-full bg-neutral text-neutral-content flex items-center justify-center">
                       R
                     </div>
                   </div>
-                  <span className="flex-1">
-                    <button onClick={() => handleSubmit(el)}>
-                      {el.userName}
-                    </button>
-                  </span>
+                  <span className="flex-1">{el.userName}</span>
                 </a>
               </li>
             );
