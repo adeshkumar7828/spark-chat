@@ -22,6 +22,10 @@ function LoginPage() {
       const formData = { email, password };
       const result = await login(formData).unwrap();
       if (result) navigate("/", { replace: true });
+      setFormData({
+        email: "",
+        password: "",
+      });
     } catch (err) {
       console.error(err);
     }

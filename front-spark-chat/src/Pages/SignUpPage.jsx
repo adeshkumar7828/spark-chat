@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { usePostUserDataForRegistrationMutation } from "../services/injected/authApi.js";
 
 function SignUpPage() {
   const [registration, { isLoading, isError, isSuccess }] =
     usePostUserDataForRegistrationMutation();
+
+  const navigate = useNavigate();
 
   const [{ userName, email, password }, setFormData] = useState({
     userName: "",
@@ -24,6 +26,12 @@ function SignUpPage() {
       console.log({ isLoading, isError, isSuccess });
       console.log(formData);
       const createdUser = await registration(formData).unwrap();
+      if (createdUser) navigate("/login", { replace: true });
+      setFormData({
+        userName: "",
+        email: "",
+        password: "",
+      });
     } catch (err) {
       console.error(err);
     }
