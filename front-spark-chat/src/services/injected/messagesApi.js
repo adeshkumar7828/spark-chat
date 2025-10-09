@@ -1,6 +1,6 @@
 import { api } from "../api/api";
 import { socket } from "../../socket/socket";
-import { current } from "@reduxjs/toolkit";
+// import { current } from "@reduxjs/toolkit";
 
 const messagesApi = api.injectEndpoints({
   endpoints: (builder) => ({

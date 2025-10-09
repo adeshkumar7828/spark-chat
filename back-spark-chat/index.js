@@ -35,7 +35,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 // Data Connection
-connectionToDB(process.env.MONGO_URI_LOCAL);
+connectionToDB(process.env.MONGO_URI_ATLAS);
 
 // parse
 app.use(express.json());
