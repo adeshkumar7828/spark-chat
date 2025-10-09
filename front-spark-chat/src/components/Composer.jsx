@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useCreateMessagesMutation } from "../services/injected/messagesApi";
+import { socket } from "../socket/socket.js";
 
 function Composer() {
   const initialFormState = { content: "" };
@@ -18,15 +19,18 @@ function Composer() {
   }
 
   async function handleSubmit(e) {
-    try {
-      e.preventDefault();
-      const dataToSendForConvCreate = {
-        content: formData.content,
-        createdBy: user._id,
-        conversationId: currentSelectedConvId,
-      };
+    e.preventDefault();
+    if (!formData.content) return;
 
+    const dataToSendForConvCreate = {
+      content: formData.content,
+      createdBy: user._id,
+      conversationId: currentSelectedConvId,
+    };
+
+    try {
       const msg = await createConv(dataToSendForConvCreate).unwrap();
+      socket.emit("newMessage", msg);
       setFormData(initialFormState);
     } catch (err) {
       console.error(err);

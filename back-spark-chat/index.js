@@ -1,7 +1,10 @@
 const express = require("express");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const connectionToDB = require("./config/db.js");
+const socketConnect = require("./socket/socketIO.js");
 
 // import router
 const userRouter = require("./routes/userRoutes.js");
@@ -9,16 +12,18 @@ const authRouter = require("./routes/authRoutes.js");
 const conversationRouter = require("./routes/conversationRoutes.js");
 const messagesRouter = require("./routes/messagesRoutes.js");
 
+const corsOptions = {
+  origin: ["http://localhost:5173"],
+  credentials: true,
+};
+
 const app = express();
+const server = createServer(app);
+const io = new Server(server, { cors: corsOptions });
 
 // CORS Setup
 const cors = require("cors");
-app.use(
-  cors({
-    origin: ["http://localhost:5173"],
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 
 // cookier-parser
 app.use(cookieParser());
@@ -47,6 +52,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/conversations", conversationRouter);
 app.use("/api/messages", messagesRouter);
 
-app.listen(PORT, () => {
+socketConnect(io);
+
+server.listen(PORT, () => {
   console.log(`Server started at PORT: ${PORT}`);
 });
