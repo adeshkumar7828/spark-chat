@@ -1,13 +1,13 @@
-import Sidebar from "./Sidebar";
-import { ContactItem } from "./ContactItem";
-import { ChatHeader } from "./ChatHeader";
-import MessageList from "./MessageList";
-import Composer from "./Composer";
-import NewChatModal from "./NewChatModal";
-import MoreOptionsMenu from "./MoreOptionsMenu";
-import MainHeader from "./MainHeader";
-import ProtectedRoute from "./ProtectedRoute";
-import LogoHeader from "./LogoHeader";
+import Sidebar from "./Sidebar.jsx";
+import { ContactItem } from "./ContactItem.jsx";
+import { ChatHeader } from "./ChatHeader.jsx";
+import MessageList from "./MessageList.jsx";
+import Composer from "./Composer.jsx";
+import NewChatModal from "./NewChatModal.jsx";
+import MoreOptionsMenu from "./MoreOptionsMenu.jsx";
+import MainHeader from "./MainHeader.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
+import LogoHeader from "./LogoHeader.jsx";
 
 export {
   Sidebar,
