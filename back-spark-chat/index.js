@@ -18,12 +18,11 @@ const corsOptions = {
 };
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server, { cors: corsOptions });
-
 // CORS Setup
 const cors = require("cors");
 app.use(cors(corsOptions));
+const server = createServer(app);
+const io = new Server(server, { cors: corsOptions });
 
 // cookier-parser
 app.use(cookieParser());
