@@ -13,7 +13,7 @@ const conversationRouter = require("./routes/conversationRoutes.js");
 const messagesRouter = require("./routes/messagesRoutes.js");
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: [process.env.ORIGIN],
   credentials: true,
 };
 
