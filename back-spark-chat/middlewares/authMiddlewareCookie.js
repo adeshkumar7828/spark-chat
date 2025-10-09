@@ -12,7 +12,7 @@ async function checkAuthByCookie(req, res, next) {
 
     //   attach the verifiedUserId user's details into the req.body
     req.user = await User.findById(verifiedUser.id).select(["-password"]);
-
+    console.log(req.user);
     return next();
   } catch (err) {
     console.error(err);
