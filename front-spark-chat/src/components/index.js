@@ -1,4 +1,4 @@
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 import { ContactItem } from "./ContactItem";
 import { ChatHeader } from "./ChatHeader";
 import MessageList from "./MessageList";
