@@ -18,8 +18,9 @@ async function handleUserLogin(req, res) {
 
     res.cookie("token", token, {
       httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
-      secure: false, // Use 'secure: true' in production
-      sameSite: "none", // Provides CSRF protection
+      secure: true, // Use 'secure: true' in production
+      sameSite: "None", // Provides CSRF protection
+      path: "/",
       maxAge: 3600000, // 1 hour (in milliseconds)
     });
 
@@ -34,7 +35,12 @@ async function handleUserLogin(req, res) {
 }
 
 function handleUserLogout(req, res) {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
+    secure: true, // Use 'secure: true' in production
+    sameSite: "None", // Provides CSRF protection
+    path: "/",
+  });
   res.status(200).json({ message: "Logout successful" });
 }
 
