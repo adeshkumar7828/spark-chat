@@ -4,10 +4,15 @@ import SidebarSearchResults from "./SidebarSearchResults";
 import useDebounce from "../customHooks/useDebounce.js";
 import { useGetAllConversationsQuery } from "../services/injected/conversationApi.js";
 import { useGetUserDataFromCookiesQuery } from "../services/injected/authApi.js";
+import { useSelector } from "react-redux";
 
 function Sidebar() {
   const { data: currentUser, isLoading } = useGetUserDataFromCookiesQuery();
   const userName = !isLoading && currentUser.userName;
+
+  const currentConvId = useSelector(
+    (state) => state.conversation.currentSelectedConvId
+  );
 
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -46,6 +51,7 @@ function Sidebar() {
             time="9:23"
             online
             initial="R"
+            active={currentConvId === conv._id}
           />
         ))}
       </div>
