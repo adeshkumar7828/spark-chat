@@ -15,7 +15,7 @@ function Sidebar() {
   const { data } = useGetAllConversationsQuery();
   // console.log(data);
   return (
-    <aside className="col-span-3 md:col-span-3 bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3 shadow-lg flex flex-col">
+    <aside className="overflow-y-auto col-span-3 md:col-span-3 bg-white/80 dark:bg-gray-900/80 rounded-2xl p-3 shadow-lg flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold">Chats </h2>
         <button className="btn btn-ghost btn-sm">New</button>
