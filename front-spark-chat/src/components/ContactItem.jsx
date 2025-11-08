@@ -1,5 +1,8 @@
 import { useDispatch } from "react-redux";
-import { useGetConversationByIdQuery } from "../services/injected/conversationApi";
+import {
+  useDeleteConversationByIdMutation,
+  useGetConversationByIdQuery,
+} from "../services/injected/conversationApi";
 import {
   addConversationName,
   changeCurrentConvId,
@@ -14,18 +17,38 @@ function ContactItem({
   initial,
   active,
 }) {
-  const { data: conversation, isLoading } = useGetConversationByIdQuery(_id);
+  const {
+    data: conversation,
+    isLoading,
+    isError,
+  } = useGetConversationByIdQuery(_id);
+
+  const [deleteConv, { isLoading: isDeleting }] =
+    useDeleteConversationByIdMutation();
 
   const singleConv = !isLoading && conversation[0]; //getting error before data arrived
+  console.log(singleConv);
   const nameOfConversation =
     !isLoading &&
+    !isError &&
     singleConv.participantsName.filter((el) => el !== loggedInUser);
+  console.log(nameOfConversation);
 
   const dispatch = useDispatch();
 
   function handleSendConversationName(name) {
     dispatch(addConversationName(name));
     dispatch(changeCurrentConvId(singleConv._id));
+  }
+
+  async function handleSendConversationIdToDelete() {
+    try {
+      const deletedConvId = await deleteConv(_id).unwrap();
+      console.log(deletedConvId);
+      dispatch(addConversationName(""));
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <>
@@ -71,7 +94,7 @@ function ContactItem({
                 <a>View Profile</a>
               </li>
               <li>
-                <a>Delete Chat</a>
+                <a onClick={handleSendConversationIdToDelete}>Delete Chat</a>
               </li>
             </ul>
           </div>
