@@ -29,9 +29,7 @@ function ContactItem({
   const singleConv = !isLoading && conversation[0]; //getting error before data arrived
   console.log(singleConv);
   const nameOfConversation =
-    !isLoading &&
-    !isError &&
-    singleConv.participantsName.filter((el) => el !== loggedInUser);
+    singleConv?.participantsName?.filter((el) => el !== loggedInUser) ?? [];
   console.log(nameOfConversation);
 
   const dispatch = useDispatch();
@@ -65,7 +63,9 @@ function ContactItem({
         </div>
         <div className="flex-1">
           <div className="flex items-center justify-between">
-            <div className="font-medium">{nameOfConversation[0]}</div>
+            <div className="font-medium">
+              {nameOfConversation[0] ?? "Deleted"}
+            </div>
             <div className="text-xs text-muted">{time}</div>
           </div>
           <div className="text-sm text-muted line-clamp-1">{last}</div>
