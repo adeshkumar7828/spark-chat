@@ -21,7 +21,7 @@ function SignUpPage() {
     try {
       e.preventDefault();
       const formData = { userName, email, password };
-      console.log({ isLoading, isError, isSuccess });
+      // console.log({ isLoading, isError, isSuccess });
       console.log(formData);
       const createdUser = await registration(formData).unwrap();
     } catch (err) {
@@ -63,7 +63,9 @@ function SignUpPage() {
             placeholder="Confirm Password"
             className="input input-bordered w-full"
           />
-          <button className="btn btn-primary w-full">Sign Up</button>
+          <button className="btn btn-primary w-full" disabled={isLoading}>
+            {isLoading ? "Signing up..." : "Sign Up"}
+          </button>
         </form>
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}

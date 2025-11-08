@@ -28,32 +28,56 @@ function ContactItem({
     dispatch(changeCurrentConvId(singleConv._id));
   }
   return (
-    <button
-      className={`group w-full text-left flex items-center gap-3 p-2 rounded-xl hover:bg-primary/10 transition ${
-        active ? "bg-primary/10" : ""
-      } cursor-default hover:cursor-pointer`}
-      onClick={() => handleSendConversationName(nameOfConversation[0])}
-    >
-      <div className="avatar">
-        <div className="w-12 h-12 rounded-full bg-neutral text-neutral-content flex items-center justify-center">
-          {initial}
+    <>
+      <button
+        className={`group w-full text-left flex items-center gap-3 p-2 rounded-xl hover:bg-primary/10 transition ${
+          active ? "bg-primary/10" : ""
+        } cursor-default hover:cursor-pointer`}
+        onClick={() => handleSendConversationName(nameOfConversation[0])}
+      >
+        <div className="avatar">
+          <div className="w-12 h-12 rounded-full bg-neutral text-neutral-content flex items-center justify-center">
+            {initial}
+          </div>
         </div>
-      </div>
-      <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <div className="font-medium">{nameOfConversation[0]}</div>
-          <div className="text-xs text-muted">{time}</div>
+        <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <div className="font-medium">{nameOfConversation[0]}</div>
+            <div className="text-xs text-muted">{time}</div>
+          </div>
+          <div className="text-sm text-muted line-clamp-1">{last}</div>
         </div>
-        <div className="text-sm text-muted line-clamp-1">{last}</div>
-      </div>
-      <div className="badge badge-xs self-start ml-1">
-        <span
-          className={`${
-            online ? "bg-green-500" : "bg-gray-400"
-          } w-2 h-2 rounded-full inline-block mr-1`}
-        />
-      </div>
-    </button>
+        <div className="flex flex-col items-center justify-center ml-2">
+          <span
+            className={`${
+              online ? "bg-green-500" : "bg-gray-400"
+            } w-2 h-2 rounded-full inline-block`}
+          />
+          <div className="h-1" />
+
+          <div className="dropdown dropdown-bottom dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-square btn-sm"
+            >
+              ...
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <a>View Profile</a>
+              </li>
+              <li>
+                <a>Delete Chat</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </button>
+    </>
   );
 }
 

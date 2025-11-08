@@ -47,8 +47,12 @@ function LoginPage() {
             value={password}
             onChange={handleChange}
           />
-          <button type="submit" className="btn btn-primary w-full">
-            Login
+          <button
+            type="submit"
+            className="btn btn-primary w-full"
+            disabled={isLoading}
+          >
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className="text-center text-sm mt-4">
