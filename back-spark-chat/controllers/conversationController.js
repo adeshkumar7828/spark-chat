@@ -67,8 +67,25 @@ async function handleGetConversationByID(req, res) {
   }
 }
 
+async function handleDeleteConversationByID(req, res) {
+  try {
+    const { _id } = req.params;
+    console.log(_id);
+
+    const deletedConversation = await Conversation.findByIdAndDelete(_id);
+
+    res.json({
+      msg: "Conversation Deleted",
+      deletedConversation,
+    });
+  } catch (error) {
+    res.json({ msg: "Unable to delete the conversation", error });
+  }
+}
+
 module.exports = {
   handleCreateConverstation,
   handleGetAllConversation,
   handleGetConversationByID,
+  handleDeleteConversationByID,
 };

@@ -3,6 +3,7 @@ const {
   handleCreateConverstation,
   handleGetAllConversation,
   handleGetConversationByID,
+  handleDeleteConversationByID,
 } = require("../controllers/conversationController");
 
 const checkAuthByCookie = require("../middlewares/authMiddlewareCookie.js");
@@ -14,5 +15,6 @@ const router = express.Router();
 router.post("/", checkAuthByCookie, handleCreateConverstation);
 router.get("/", checkAuthByCookie, handleGetAllConversation);
 router.get("/:_id", checkAuthByCookie, handleGetConversationByID);
+router.delete("/:_id", checkAuthByCookie, handleDeleteConversationByID);
 
 module.exports = router;

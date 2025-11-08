@@ -24,8 +24,6 @@ const messagesApi = api.injectEndpoints({
       }),
       providesTags: ["Messages"],
 
-      /* keeping for later: providesTags: (result, error, _id) => [{ type: "Messages", id: _id }],*/
-
       async onCacheEntryAdded(_id, { updateCachedData, cacheEntryRemoved }) {
         try {
           socket.emit("joinRoom", _id);

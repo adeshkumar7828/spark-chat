@@ -24,7 +24,18 @@ export const conversationApi = api.injectEndpoints({
         url: `/api/conversations/${_id}`,
         method: "GET",
       }),
-      providesTags: (result, error, _id) => [{ type: "User", id: _id }],
+      providesTags: (result, error, _id) => [{ type: "Conversation", id: _id }],
+    }),
+
+    deleteConversationById: builder.mutation({
+      query: (_id) => ({
+        url: `/api/conversations/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, _id) => [
+        { type: "Conversation", id: _id },
+        { type: "Conversations" },
+      ],
     }),
   }),
 });
@@ -33,4 +44,5 @@ export const {
   usePostNewConversationMutation,
   useGetAllConversationsQuery,
   useGetConversationByIdQuery,
+  useDeleteConversationByIdMutation,
 } = conversationApi;

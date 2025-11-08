@@ -6,6 +6,6 @@ export const api = createApi({
     baseUrl: import.meta.env.VITE_API_URL,
     credentials: "include", // line for cookies to include
   }),
-  tagTypes: ["Conversations", "User", "Messages"],
+  tagTypes: ["Conversations", "Conversation", "User", "Messages"],
   endpoints: () => ({}),
 });
