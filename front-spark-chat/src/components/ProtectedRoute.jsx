@@ -21,7 +21,7 @@ function ProtectedRoute() {
     );
   }
 
-  // Handle the success state
+  // Handle User is authenticated from server cookie. Allow access.
   if (isSuccess && (user || data)) {
     return <Outlet />;
   }
@@ -32,7 +32,7 @@ function ProtectedRoute() {
     return <Navigate to={"/login"} replace />;
   }
 
-  // Fallback case (should be unreachable with proper logic)
+  // Fallback case (Should almost not happen.)
   return <div>Something went wrong.</div>;
 }
 
