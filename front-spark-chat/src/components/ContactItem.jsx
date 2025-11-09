@@ -79,11 +79,7 @@ function ContactItem({
           <div className="h-1" />
 
           <div className="dropdown dropdown-bottom dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-square btn-sm"
-            >
+            <div tabIndex={0} role="button" className="btn btn-xs btn-ghost">
               ...
             </div>
             <ul
