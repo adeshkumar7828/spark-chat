@@ -14,7 +14,11 @@ function ProtectedRoute() {
 
   // Handle the loading state while the request is in progress
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <progress className="progress w-56 text-primary"></progress>
+      </div>
+    );
   }
 
   // Handle the success state
